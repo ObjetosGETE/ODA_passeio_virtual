@@ -1,7 +1,59 @@
+function escalaProporcao(largura, altura) {
+
+    var larguraScreen = $(window).width();
+    var alturaScreen = $(window).height();
+    var proporcaoAltura = (alturaScreen * 100) / altura;
+    var proporcaoLargura = (larguraScreen * 100) / largura;
+    var proporcao, larguraAltura, larguraAlturaAuto;
+
+    if (proporcaoAltura < proporcaoLargura) {
+        larguraAltura = "height";
+        larguraAlturaAuto = "width";
+        proporcao = proporcaoAltura / 100;
+    } else {
+        larguraAltura = "width";
+        larguraAlturaAuto = "height";
+        proporcao = proporcaoLargura / 100;
+    }
+
+    return [proporcao, larguraAltura, larguraAlturaAuto];
+}
+
+function resizeBodyConteudo() {
+
+    var proporcao1920 = escalaProporcao(1920, 1080)[0];
+
+    $(".wrapper").css({
+        "transform": "scale(" + proporcao1920 + ")",
+        "transform-origin": "center 0"
+    });
+
+    var proporcao900;
+
+    if ($(window).width() < 992) {
+        proporcao900 = escalaProporcao(900, 576)[0];
+    } else {
+        proporcao900 = 1;
+    }
+}
+
+$(document).ready(function () {
+    resizeBodyConteudo()
+    $(window).resize(function () {
+        resizeBodyConteudo()
+    })
+
+});
+
+$('.btn-voltar').click(function(){
+    $('.conteudo').fadeOut()
+    $('.inicio').fadeIn()
+    $('.bg').removeClass('active')
+})
 
 $('.left').click(function(){
     $('.inicio').fadeOut()
-    $('.wrapper').css('background-position-x', '90%')
+    $('.bg').addClass('active')
     window.setTimeout(function(){$('.conteudo').fadeIn()}, 2750)
     window.setTimeout(function(){
         $('.modal-btn-1').fadeIn()
@@ -12,20 +64,10 @@ $('.left').click(function(){
     window.setTimeout(function(){
         $('.modal-btn-3').fadeIn()
     }, 3750)
+    window.setTimeout(function(){
+        $('.btn-voltar').fadeIn()
+    }, 3750)
 })
 $('.right').click(function(){
     $('.wrapper').css('background-position-x', '0%')
-})
-
-$('.modal-btn-1').click(function(){
-    $('.modal-custom').fadeOut()
-    $('.modal-1').fadeIn()
-})
-$('.modal-btn-2').click(function(){
-    $('.modal-custom').fadeOut()
-    $('.modal-2').fadeIn()
-})
-$('.modal-btn-3').click(function(){
-    $('.modal-custom').fadeOut()
-    $('.modal-3').fadeIn()
 })
