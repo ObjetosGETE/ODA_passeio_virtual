@@ -87,6 +87,9 @@ button.modal-btn {
 .bg.active {
     animation: init 2.5s forwards;
 }
+.bg.return {
+    animation: return 2.5s forwards;
+}
 .btn-voltar {
     padding: 10px 25px;
     border: none;
@@ -124,4 +127,8 @@ button.modal-btn {
 }
 @keyframes init {
     100% {left: -1700px;}
+}
+@keyframes return {
+    0% {left: -1700px;}
+    100% {left: 0px;}
 }

@@ -48,12 +48,16 @@ $(document).ready(function () {
 $('.btn-voltar').click(function(){
     $('.conteudo').fadeOut()
     $('.inicio').fadeIn()
-    $('.bg').removeClass('active')
+    $('.bg').css('animation', 'return 2.5s forwards')
 })
 
 $('.left').click(function(){
     $('.inicio').fadeOut()
-    $('.bg').addClass('active')
+    if($('.bg').hasClass('active')){
+        $('.bg').css('animation', 'init 2.5s forwards')
+    } else {
+        $('.bg').addClass('active')
+    }
     window.setTimeout(function(){$('.conteudo').fadeIn()}, 2750)
     window.setTimeout(function(){
         $('.modal-btn-1').fadeIn()
