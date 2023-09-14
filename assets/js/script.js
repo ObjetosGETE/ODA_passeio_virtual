@@ -25,7 +25,7 @@ function resizeBodyConteudo() {
 
     $(".wrapper").css({
         "transform": "scale(" + proporcao1920 + ")",
-        "transform-origin": "center 0"
+        "transform-origin": "center center"
     });
 
     var proporcao900;
